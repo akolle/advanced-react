@@ -3,17 +3,23 @@ import { data } from '../../../data/'
 
 const UserChallenge = () => {
   const [name, setName] = useState('')
-  const [newData, setNewData] = useState(data)
+  const [users, setUsers] = useState(data)
 
   const handleSubmit = (e) => {
     //do something
     e.preventDefault()
-    console.log(name)
+    // setUsers([name, ...data])
+    if (!name) return
+    const fakeId = Date.now()
+    const newUser = { id: fakeId, name }
+    const updatedUsers = [...users, newUser]
+    setUsers(updatedUsers)
+    setName('')
   }
 
   return (
     <div>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <h4>Add User</h4>
         <div className="form-row">
           <label htmlFor="name" className="form-label">
@@ -33,6 +39,10 @@ const UserChallenge = () => {
         </button>
       </form>
       {/* render users below */}
+      <h4>users</h4>
+      {users.map((user) => {
+        return <h5 key={user.id}>{user.name}</h5>
+      })}
     </div>
   )
 }
