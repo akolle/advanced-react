@@ -3,12 +3,13 @@ import { useEffect, useRef, useState } from 'react'
 const UseRefBasics = () => {
   const [value, setValue] = useState(0)
   const refContainer = useRef(null)
+  const isMounted = useRef(false)
 
   // console.log(refContainer);
 
-  // useEffect(()=>{
-  //   console.log(refContainer);
-  // })
+  useEffect(() => {
+    refContainer.current.focus()
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault()
